@@ -1,0 +1,44 @@
+PAPHANKORN TANAROJ
+
+Address: 299/46, Pracha-Uthit 84/3 Pracha-Uthit Road,	         
+Thung Khru Sub-district/District, Bangkok 10140
+Phone: +66(0)990567604 
+E-mail: paphankorn.tanaroj@gmail.com 
+GitHub: https://github.com/pholpaphankorn 
+
+SKILLS
+Programming Languages: (Intermediate) Python | Java; (Basic) JavaScript | Dart | Kotlin | C#
+Frontend Development: Flutter | ReactJS
+Backend Development: Flask | Express | NodeJS | Spring Boot | ASP.NET Core | Django 
+Database Technologies: PostgreSQL | Redis | MongoDB
+CI/CD Tools: Git | Docker | Kubernetes | Jenkins
+Scripting and Shell: UNIX | Bash
+Cloud Technology: Google Kubernetes Engine (GKE) | Amazon EC2
+Language Proficiency: English (TOEIC: 745)
+
+SOFTWARE PROJECTS 
+May 2023	Android 3D Model Marketplace with 3D Reconstruction Service App
+•	Developed a 3D reconstruction service for users to turn pictures into 3D models using AI.
+•	Designed a pipeline with microservices for image processing, camera pose estimation, 3D reconstruction, mesh texturing and refinement.
+•	Integrated AI services for 3D reconstruction and image processing.
+•	Created a RESTful backend server with task queue to handle multiple 3D reconstruction tasks.
+•	Utilized: Flutter, Flask, Redis, COLMAP, Open3D, PyMeshLab, Docker
+
+April 2021	Web Dog Boarding App
+•	Integrated Google Maps APIs to enable users to easily locate nearby dog boarding hosts.
+•	Developed a real-time service progress page to provide users with live updates on the status of their dog boarding service.
+•	Implemented a mock-up payment service with email notifications to the host upon successful payment.
+•	Utilized: React, Django, PostgreSQL, Google Maps APIs
+
+EDUCATION
+2019-2023	King Mongkut's Institute of Technology Ladkrabang, Computer Engineering Department, Bangkok, Thailand, Bachelor of Engineering, GPA 3.59/4
+•	Programming Coursework: Data Structures & Algorithms, Object-Oriented Programming, Software Architecture & Design Software Development Process, Computer Networks, 
+Operating Systems, Database Systems
+•	CE Coursework: Digital Systems Fundamentals, Data Communications, Computer Architecture, Computer Organization & Assembly Language, Circuits & Electronics
+
+EXPERIENCE
+06/2022-07/2022	Software Developer Intern, Beryl 8 Plus, Bangkok, Thailand
+•	Integrated the Salesforce CRM platform to enable seamless PDF generation for the bank's digital onboarding process.
+•	Implemented customer acknowledgement system for the bank’s clients by customizing Salesforce lightning component. This system allows users to complete forms, send emails, and download or print PDF summaries.
+•	Leveraged knowledge in JavaScript, HTML, CSS, APEX (Similar to C# and Java), SQL, Visualforce, and Lightning Component.
+

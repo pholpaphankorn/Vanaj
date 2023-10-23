@@ -44,9 +44,9 @@ export function ChatWindow(props: {
         const sourcesHeader = response.headers.get("x-sources");
         const sources = sourcesHeader ? JSON.parse(atob(sourcesHeader)) : [];
         const messageIndexHeader = response.headers.get("x-message-index");
-        if (sources.length && messageIndexHeader !== null) {
-          setSourcesForMessages({...sourcesForMessages, [messageIndexHeader]: sources});
-        }
+        // if (sources.length && messageIndexHeader !== null) {
+        //   setSourcesForMessages({...sourcesForMessages, [messageIndexHeader]: sources});
+        // }
       },
       onError: (e) => {
         toast(e.message, {
@@ -56,6 +56,7 @@ export function ChatWindow(props: {
     });
 
   async function sendMessage(e: FormEvent<HTMLFormElement>) {
+
     e.preventDefault();
     if (messageContainerRef.current) {
       messageContainerRef.current.classList.add("grow");
@@ -66,14 +67,20 @@ export function ChatWindow(props: {
     if (chatEndpointIsLoading ?? intermediateStepsLoading) {
       return;
     }
+
     if (!showIntermediateSteps) {
       handleSubmit(e);
     // Some extra work to show intermediate steps properly
+    
     } else {
+
       setIntermediateStepsLoading(true);
+
       setInput("");
+
       const messagesWithUserReply = messages.concat({ id: messages.length.toString(), content: input, role: "user" });
       setMessages(messagesWithUserReply);
+
       const response = await fetch(endpoint, {
         method: "POST",
         body: JSON.stringify({
@@ -81,6 +88,7 @@ export function ChatWindow(props: {
           show_intermediate_steps: true
         })
       });
+
       const json = await response.json();
       setIntermediateStepsLoading(false);
       if (response.status === 200) {
