@@ -13,7 +13,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
-        <title>LangChain + Next.js Template</title>
+        <title>Vanaj</title>
         <link rel="shortcut icon" href="/images/favicon.ico" />
         <meta
           name="description"
@@ -34,8 +34,8 @@ export default function RootLayout({
         <meta name="twitter:image" content="/images/og-image.png" />
       </head>
       <body className={publicSans.className}>
-        <div className="flex flex-col p-4 md:p-12 h-[100vh]">
-          <Navbar></Navbar>
+        <div>
+          {/* <Navbar></Navbar> */}
           {children}
         </div>
       </body>
