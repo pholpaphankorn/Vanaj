@@ -115,13 +115,15 @@ export function ChatWindow(props: {
   }
 
   return (
-    <div className={`flex flex-col items-center p-4 md:p-8 rounded grow overflow-hidden ${(messages.length > 0 ? "border" : "")}`}>
-      <h2 className={`${messages.length > 0 ? "" : "hidden"} text-2xl`}>{emoji} {titleText}</h2>
+    
+    <div className={`flex flex-col items-center p-4 md:p-8 rounded grow overflow-hidden mx-auto sm:max-w-4xl sm:px-4 p-4 md:p-12 h-[100vh]`}>
+      {/* <h2 className={`${messages.length > 0 ? "" : "hidden"} text-2xl`}>{emoji} {titleText}</h2> */}
       {messages.length === 0 ? emptyStateComponent : ""}
       <div
-        className="flex flex-col-reverse w-full mb-4 overflow-auto transition-[flex-grow] ease-in-out"
+        className="flex flex-col-reverse w-full mb-32 overflow-auto transition-[flex-grow] ease-in-out "
         ref={messageContainerRef}
       >
+        
         {messages.length > 0 ? (
           [...messages]
             .reverse()
@@ -136,7 +138,7 @@ export function ChatWindow(props: {
 
       {messages.length === 0 && ingestForm}
 
-      <form onSubmit={sendMessage} className="flex w-full flex-col">
+      <form onSubmit={sendMessage} className="fixed inset-x-0 bottom-0 bg-gradient-to-b from-muted/10 from-10% to-muted/30 to-50% mx-auto sm:max-w-4xl sm:px-4">
         <div className="flex">
           {intemediateStepsToggle}
         </div>
