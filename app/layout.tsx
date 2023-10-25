@@ -34,7 +34,7 @@ export default function RootLayout({
         <meta name="twitter:image" content="/images/og-image.png" />
       </head>
       <body className={publicSans.className}>
-        <div>
+        <div className="overflow-auto">
           {/* <Navbar></Navbar> */}
           {children}
         </div>
