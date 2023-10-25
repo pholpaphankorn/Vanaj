@@ -18,7 +18,7 @@ export default function Home() {
       endpoint="api/chat/retrieval"
       titleText="Vanaj"
       placeholder="Ask me anything!"
-      emptyStateComponent={InfoCard}
+      emptyStateComponent=""
     ></ChatWindow>
 
 
