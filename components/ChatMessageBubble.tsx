@@ -1,5 +1,5 @@
 import type { Message } from "ai/react";
-import CircularProfile from "./CircularProfile";
+import {CircularProfile} from "@/components/CircularProfile";
 
 export function ChatMessageBubble(props: { message: Message, aiEmoji?: string, sources: any[] }) {
   const colorClassName =
@@ -10,29 +10,27 @@ export function ChatMessageBubble(props: { message: Message, aiEmoji?: string, s
     props.message.role === "user" ? "flex min-h-[85px] rounded-b-xl rounded-tl-xl px-4  sm:min-h-0 sm:max-w-md md:max-w-2xl" : "flex rounded-b-xl rounded-tr-xl px-4 sm:max-w-md md:max-w-2xl";
   return (
 
-    // <div
-    //   className="rounded px-4 py-2 mb-10"
-    // >
-    //   <div className={alignmentClassName}>
-    //     {props.message.role === "user" ? null :
-    //       <div className="relative inline-flex">
-    //         <span
-    //           className="absolute bottom-0 right-1 h-3 w-3 rounded-full border bg-green-600 dark:border-slate-900 dark:bg-green-600 dark:text-slate-100"
-    //         ></span>
-    //         <img
-    //           className="mr-2 h-8 w-8 rounded-full"
-    //           src="https://i.kym-cdn.com/entries/icons/original/000/018/166/pakalu.png"
-    //         />
-    //       </div>
-    //     }
-    //     <div
-    //       className={`${styleClassName} ${colorClassName}`}
-    //     >
-    //       <p className="text-2xl">{props.message.content}</p>
-    //     </div>
-    //   </div>
-    // </div>
-<div
+    <div
+      className="rounded py-2"
+    >
+      <div className={alignmentClassName}>
+        {props.message.role === "user" ? null :
+            <CircularProfile active={true} size="8"/>
+        }
+        <div
+          className={`${styleClassName} ${colorClassName}`}
+        >
+          <p className="text-lg whitespace-pre-line">{props.message.content}</p>
+        </div>
+      </div>
+    </div>
+
+  );
+}
+
+
+
+const data=(<div
   className="flex-1 space-y-6 overflow-y-auto rounded-xl bg-slate-200 p-4 text-sm leading-6 text-slate-900 shadow-sm dark:bg-slate-900 dark:text-slate-300 sm:text-base sm:leading-7"
 >
   <div className="flex items-start">
@@ -209,8 +207,4 @@ export function ChatMessageBubble(props: { message: Message, aiEmoji?: string, s
       </button>
     </div>
   </div>
-</div>
-
-
-  );
-}
+</div>);

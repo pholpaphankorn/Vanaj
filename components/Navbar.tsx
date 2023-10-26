@@ -1,13 +1,17 @@
 "use client";
-
-import { usePathname } from 'next/navigation';
-
+import {ProfileCard} from "@/components/ProfileCard";
 export function Navbar() {
-  const pathname = usePathname();
-  return (
-    <nav className="mb-4">
-      <h1>Vanaj</h1>
 
-    </nav>
+  return (
+<>
+<nav className="bg-white dark:bg-white fixed w-full z-20 top-0 left-0 ">
+
+  <div className="max-w-screen-xl flex justify-center mx-auto">
+      <ProfileCard active={true}/>
+  </div>
+</nav>
+</>
+
   );
 }
+
