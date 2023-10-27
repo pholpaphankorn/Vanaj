@@ -72,11 +72,11 @@ export function ChatWindow(props: {
       return;
     }
 
-    // handleSubmit(e);
+    handleSubmit(e);
     // Some extra work to show intermediate steps properly
-    const newMessages = messages.concat({ id: messages.length.toString() + 'user', content: input, role: "user" });
-    const replyMessages = messages.concat({ id: messages.length.toString() + 'vanaj', content: input, role: "Vanaj" });
-    setMessages([...newMessages, ...replyMessages]);
+    // const newMessages = messages.concat({ id: messages.length.toString() + 'user', content: input, role: "user" });
+    // const replyMessages = messages.concat({ id: messages.length.toString() + 'vanaj', content: input, role: "Vanaj" });
+    // setMessages([...newMessages, ...replyMessages]);
 
 
 
@@ -94,7 +94,7 @@ export function ChatWindow(props: {
         ref={messageContainerRef}
       >
         <div
-          className="flex flex-col-reverse w-full mt-20 mb-24 transition-[flex-grow] ease-in-out"
+          className="flex flex-col-reverse w-full mt-16 mb-24 transition-[flex-grow] ease-in-out"
         >
           {messages.length > 0 ? (
             [...messages]
@@ -110,7 +110,7 @@ export function ChatWindow(props: {
         </div>
       </div>
 
-      <div className="fixed pb-4 pt-4 rounded-t-lg inset-x-0 bottom-0 bg-white from-muted/10 from-10% to-muted/30 to-50% mx-auto sm:max-w-4xl sm:px-4">
+      <div className="fixed sm:pb-4 sm:pt-4 rounded-t-lg inset-x-0 bottom-0 sm:bg-white from-muted/10 from-10% to-muted/30 to-50% mx-auto sm:max-w-4xl sm:px-4">
         <form onSubmit={sendMessage} onKeyPress={onEnter} >
           <label htmlFor="chat-input" className="sr-only">{placeholder}</label>
           <div className="relative">
