@@ -1,14 +1,12 @@
-export function CircularProfile(props: { active: Boolean, size: string}){
-    const pictureSize = props.size;
-    const statusSize= props.size==="8"?"2":"3";
-    console.log(pictureSize, statusSize,"hey")
+export function CircularProfile(props: { active: Boolean, type?: string}){
+
     return (
-        <div className="relative inline-flex shrink-0">
+        <div className={`relative inline-flex shrink-0 ${props.type=='profile'?"self-center":""}`}>
         {props.active?<span
-          className={`absolute bottom-0 right-2 h-3 w-3 rounded-full bg-green-600 dark:border-slate-900 dark:bg-green-600 dark:text-slate-100`}
+          className={`status-${props.type}-size  w-3 h-3 absolute rounded-full bg-green-600 dark:border-slate-900 dark:bg-green-600 dark:text-slate-100`}
         ></span>:null}
         <img
-          className={`mr-2 h-${pictureSize} w-${pictureSize} rounded-full `}
+          className={`image-${props.type}-size mr-2 rounded-full `}
           src="https://source.unsplash.com/40x40/?portrait"
         />
       </div>
