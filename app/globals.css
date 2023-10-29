@@ -12,120 +12,220 @@ body textarea {
   color: black;
 }
 
-a {
-  color: #2d7bd4;
-}
-
-a:hover {
-  border-bottom: 1px solid;
-}
-
 p {
   margin: 8px 0;
 }
 
-code {
-  color: #ffa500;
-}
-
-li {
-  padding: 4px;
-}
 /* width */
 ::-webkit-scrollbar {
-    width: 10px;
+  width: 10px;
 }
- 
+
 /* Track */
 ::-webkit-scrollbar-track {
-    background: #252525;
+  background: #252525;
 }
- 
+
 /* Handle */
 ::-webkit-scrollbar-thumb {
-    background: #888;
-    border-radius: 5px;
+  background: #888;
+  border-radius: 5px;
 }
- 
+
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-    background: #555;
+  background: #555;
 }
-/* @tailwind base;
-@tailwind components;
-@tailwind utilities;
 
 @layer base {
-  :root {
-    --background: 0 0% 100%;
-    --foreground: 240 10% 3.9%;
+  @media (min-width: 0px) {
+    .hero-header {
+      @apply text-4xl;
+  
+    }
+  
+    .hero-content {
+      @apply text-base;
+  
+    }
+  
+    .get-started-txt {
+      @apply text-sm;
+  
+    }
+  
+    .vanaj-logo-txt {
+      @apply text-xl;
+    }
+  
+    .navbar-height {
+      @apply h-12;
+    }
+    .vanaj-name-txt{
+      @apply text-sm;
+    }
+    .chat-message-txt{
+      @apply text-sm;
+    }
+    .text-area-chat{
+      @apply text-sm p-2 pr-16;
 
-    --muted: 240 4.8% 95.9%;
-    --muted-foreground: 240 3.8% 46.1%;
+    }
+    .status-txt{
+      font-size: 0.6rem;
+      line-height: 0.75rem;;
+    }
+    
+    .image-profile-size{
+      @apply w-8 h-8;
+    }
+    .status-profile-size{
+      @apply w-2 h-2;
+      @apply bottom-0 right-2;
+    }
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 240 10% 3.9%;
+    .image-chat-size{
+      @apply w-7 h-7;
+    }
+    .status-chat-size{
+      @apply w-1.5 h-1.5;
+      @apply bottom-0 right-2;
+    }
 
-    --card: 0 0% 100%;
-    --card-foreground: 240 10% 3.9%;
+    .send-btn{
+      @apply w-7 h-7 pl-1.5 bottom-1 right-1;
+    }
 
-    --border: 240 5.9% 90%;
-    --input: 240 5.9% 90%;
+    .send-icon{
+      @apply w-4 h-4;
+    }
 
-    --primary: 240 5.9% 10%;
-    --primary-foreground: 0 0% 98%;
 
-    --secondary: 240 4.8% 95.9%;
-    --secondary-foreground: 240 5.9% 10%;
 
-    --accent: 240 4.8% 95.9%;
-    --accent-foreground: ;
-
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 0 0% 98%;
-
-    --ring: 240 5% 64.9%;
-
-    --radius: 0.5rem;
   }
 
-  .dark {
-    --background: 240 10% 3.9%;
-    --foreground: 0 0% 98%;
 
-    --muted: 240 3.7% 15.9%;
-    --muted-foreground: 240 5% 64.9%;
+  @media screen(md) {
+    .hero-header {
+      @apply text-5xl;
+      
+    }
 
-    --popover: 240 10% 3.9%;
-    --popover-foreground: 0 0% 98%;
+    .hero-content {
+      @apply text-lg;
 
-    --card: 240 10% 3.9%;
-    --card-foreground: 0 0% 98%;
+    }
 
-    --border: 240 3.7% 15.9%;
-    --input: 240 3.7% 15.9%;
+    .get-started-txt {
+      @apply text-base;
 
-    --primary: 0 0% 98%;
-    --primary-foreground: 240 5.9% 10%;
+    }
 
-    --secondary: 240 3.7% 15.9%;
-    --secondary-foreground: 0 0% 98%;
+    .vanaj-logo-txt {
+      @apply text-2xl;
+    }
+    
 
-    --accent: 240 3.7% 15.9%;
-    --accent-foreground: ;
+    .navbar-height {
+      @apply h-14;
+    }
 
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 0 85.7% 97.3%;
-
-    --ring: 240 3.7% 15.9%;
+    .vanaj-name-txt{
+      @apply text-base;
+    }
+    .chat-message-txt{
+      @apply text-base;
+    }
+    .text-area-chat{
+      @apply text-base p-4 pr-16;
+    }
+    .status-txt{
+      font-size: 0.7rem;
+      line-height: 0.75rem;;
+    }
+    .image-profile-size{
+      @apply w-9 h-9;
+    }
+    .status-profile-size{
+      @apply w-3 h-3;
+      @apply bottom-0 right-2;
+    }
+    .image-chat-size{
+      @apply w-8 h-8;
+    }
+    .status-chat-size{
+      @apply w-2.5 h-2.5;
+      @apply bottom-0 right-2;
+    }
+    .send-btn{
+      @apply w-10 h-10 p-2 bottom-2 right-2;
+    }
+    .send-icon{
+      @apply w-6 h-6 ;
+    }
   }
-} */
 
-/* @layer base {
-  * {
-    @apply border-border;
+
+  @media screen(xl) {
+    .hero-header {
+      @apply text-6xl;
+
+    }
+
+    .hero-content {
+      @apply text-xl;
+
+    }
+
+    .get-started-txt {
+      @apply text-lg;
+
+    }
+
+    .vanaj-logo-txt {
+      @apply text-3xl;
+    }
+
+    .navbar-height {
+      @apply h-16;
+    }
+    .vanaj-name-txt{
+      @apply text-lg;
+    }
+    .chat-message-txt{
+      @apply text-lg;
+    }
+    .text-area-chat{
+      @apply text-lg;
+    }
+    .status-txt{
+      @apply text-xs
+    }
+    .image-profile-size{
+      @apply w-10 h-10;
+    }
+    .status-profile-size{
+      @apply w-3.5 h-3.5;
+      @apply bottom-0 right-2;
+    }
+    .image-chat-size{
+      @apply w-9 h-9;
+    }
+    .status-chat-size{
+      @apply w-3 h-3;
+      @apply bottom-0 right-2;
+    }
   }
-  body {
-    @apply bg-background text-foreground;
-  }
-} */
+
+  /* text-5xl md:text-6xl xl:text-7xl  */
+}
+
+
+
+
+/* Breakpoint prefix	Minimum width	CSS
+sm	640px	@media (min-width: 640px) { ... }
+md	768px	@media (min-width: 768px) { ... }
+lg	1024px	@media (min-width: 1024px) { ... }
+xl	1280px	@media (min-width: 1280px) { ... }
+2xl	1536px	@media (min-width: 1536px) { ... } */

@@ -7,7 +7,7 @@ export default function ChatPage() {
       <ChatWindow
         endpoint="api/chat/retrieval"
         titleText="Vanaj"
-        placeholder="Ask me anything!"
+        placeholder="Ask me some questions!"
 
       ></ChatWindow>
     </>
