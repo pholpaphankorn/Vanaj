@@ -72,11 +72,11 @@ export function ChatWindow(props: {
       return;
     }
 
-    // handleSubmit(e);
+    handleSubmit(e);
     // Some extra work to show intermediate steps properly
-    const newMessages = messages.concat({ id: messages.length.toString() + 'user', content: input, role: "user" });
-    const replyMessages = messages.concat({ id: messages.length.toString() + 'vanaj', content: input, role: "Vanaj" });
-    setMessages([...newMessages, ...replyMessages]);
+    // const newMessages = messages.concat({ id: messages.length.toString() + 'user', content: input, role: "user" });
+    // const replyMessages = messages.concat({ id: messages.length.toString() + 'vanaj', content: input, role: "Vanaj" });
+    // setMessages([...newMessages, ...replyMessages]);
 
 
 
