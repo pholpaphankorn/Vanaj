@@ -3,7 +3,7 @@ import {CircularProfile} from "@/components/CircularProfile";
 
 export function ChatMessageBubble(props: { message: Message, aiEmoji?: string, sources: any[] }) {
   const colorClassName =
-    props.message.role === "user" ? "bg-sky-600" : "bg-slate-50 text-black";
+    props.message.role === "user" ? "chat-message-user-color" : "chat-message-vanaj-color ";
   const alignmentClassName =
     props.message.role === "user" ? "flex flex-row-reverse items-start" : "flex items-start";
   const styleClassName =
