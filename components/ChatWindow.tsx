@@ -72,11 +72,11 @@ export function ChatWindow(props: {
       return;
     }
 
-    handleSubmit(e);
+    // handleSubmit(e);
     // Some extra work to show intermediate steps properly
-    // const newMessages = messages.concat({ id: messages.length.toString() + 'user', content: input, role: "user" });
-    // const replyMessages = messages.concat({ id: messages.length.toString() + 'vanaj', content: input, role: "Vanaj" });
-    // setMessages([...newMessages, ...replyMessages]);
+    const newMessages = messages.concat({ id: messages.length.toString() + 'user', content: input, role: "user" });
+    const replyMessages = messages.concat({ id: messages.length.toString() + 'vanaj', content: input, role: "Vanaj" });
+    setMessages([...newMessages, ...replyMessages]);
 
 
 
@@ -88,7 +88,7 @@ export function ChatWindow(props: {
   }, [messages]);
   return (
 
-    <div className={`flex flex-col items-center p-4 md:p-8 rounded grow mx-auto sm:max-w-5xl sm:px-4 p-4 md:p-12 min-h-[100vh] dark:bg-slate-900`}>
+    <div className={`chat-window flex flex-col items-center p-4 md:p-8 rounded grow mx-auto sm:max-w-5xl sm:px-4 p-4 md:p-12 min-h-[100vh] `}>
       <div
         className="flex w-full"
         ref={messageContainerRef}
@@ -110,13 +110,13 @@ export function ChatWindow(props: {
         </div>
       </div>
 
-      <div className="fixed p-2 lg:rounded-t-lg inset-x-0 bottom-0 bg-white from-muted/10 from-10% to-muted/30 to-50% mx-auto sm:max-w-4xl">
+      <div className="text-area-container fixed p-2 lg:rounded-t-xl inset-x-0 bottom-0 from-muted/10 from-10% to-muted/30 to-50% mx-auto sm:max-w-4xl">
         <form onSubmit={sendMessage} onKeyPress={onEnter} >
           <label htmlFor="chat-input" className="sr-only">{placeholder}</label>
           <div className="relative">
 
         <AutoResizeTextarea
-          className="text-area-chat block w-full resize-none rounded-xl border-none bg-slate-200  text-slate-900 shadow-md focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-slate-800 dark:text-slate-200 dark:placeholder-slate-400 dark:focus:ring-blue-500"
+          className="text-area-chat block w-full resize-none rounded-xl "
           value={input}
           maxRows={5}
           placeholder={placeholder}
@@ -125,7 +125,7 @@ export function ChatWindow(props: {
         />
             <button
               type="submit"
-              className="absolute send-btn  rounded-lg bg-blue-700  hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 "
+              className="absolute send-btn rounded-lg  "
             >
               <div role="status" className={`${(chatEndpointIsLoading) ? "" : "hidden"} flex justify-center send-icon`}>
                 <svg aria-hidden="true" className=" text-white animate-spin dark:text-white fill-sky-800" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">

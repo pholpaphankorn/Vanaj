@@ -4,7 +4,7 @@
 
 body {
   color: #f8f8f8;
-  background: #131318;
+  @apply bg-fs-lemon-grass;
 }
 
 body input,
@@ -36,6 +36,61 @@ p {
 ::-webkit-scrollbar-thumb:hover {
   background: #555;
 }
+nav{
+ @apply bg-fs-ash;
+}
+ .vanaj-logo-txt {
+  @apply text-fs-red;
+}
+
+.get-started-txt {
+  color: white;
+
+  
+}
+.get-started-btn {
+  @apply bg-fs-red hover:bg-fs-dark-red;
+
+  
+}
+.hero-header {
+  color: black;
+
+}
+
+.hero-content {
+  @apply text-fs-tobacco-brown;
+
+}
+
+.vanaj-name-txt{
+  color: black;
+}
+.chat-message-vanaj-color{
+  @apply bg-white text-black;
+}
+.chat-message-user-color{
+  @apply bg-fs-red text-white;
+}
+.send-btn{
+  @apply bg-fs-red hover:bg-fs-dark-red;
+}
+
+.text-area-chat{
+  @apply bg-white text-black placeholder-fs-tobacco-brown focus:outline-none;
+
+
+}
+.text-area-container{
+  @apply bg-fs-red;
+}
+.status-txt{
+@apply text-fs-tobacco-brown;
+}
+.chat-window{
+  @apply bg-fs-bud rounded-xl;
+
+}
 
 @layer base {
   @media (min-width: 0px) {
@@ -58,8 +113,8 @@ p {
       @apply text-xl;
     }
   
-    .navbar-height {
-      @apply h-12;
+    .navbar-container-height {
+      @apply h-12 ;
     }
     .vanaj-name-txt{
       @apply text-sm;
@@ -126,7 +181,7 @@ p {
     }
     
 
-    .navbar-height {
+    .navbar-container-height{
       @apply h-14;
     }
 
@@ -186,7 +241,7 @@ p {
       @apply text-3xl;
     }
 
-    .navbar-height {
+    .navbar-container-height{
       @apply h-16;
     }
     .vanaj-name-txt{

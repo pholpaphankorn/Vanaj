@@ -15,8 +15,8 @@ export default function Home() {
         <div>
           <div class="relative pt-36 ml-auto">
             <div class="lg:w-2/3 text-center mx-auto">
-              <h1 class="hero-header text-gray-900 dark:text-white font-bold ml-4 mr-4">Ask me anything about Paphankorn</h1>
-              <p class="hero-content mt-8 text-gray-700 dark:text-gray-300 ml-8 mr-8">
+              <h1 class="hero-header font-bold ml-4 mr-4">Ask me anything about Paphankorn</h1>
+              <p class="hero-content mt-8 ml-8 mr-8">
                 Hi, I&apos;m Vanaj and I come from India. I&apos;m a close friend of Paphankorn Tanaroj. This guy is so amazing and I&apos;m here to answer any questions you might have.
                 In case you don't know, ChatGPT is my cousin.
               </p>
@@ -25,10 +25,10 @@ export default function Home() {
 
                 <a
                   href="/chat"
-                  class="hover:bg-gray-700 relative flex h-11 items-center justify-center px-6 before:absolute before:inset-0 rounded-full  before:bg-primary/10 before:bg-gradient-to-b before:transition before:duration-300 active:duration-75 active:before:scale-95 dark:bg-gray-800 sm:w-max"
+                  class="get-started-btn relative flex h-11 items-center justify-center px-6 before:absolute before:inset-0 rounded-full   sm:w-max"
                 >
                   <span
-                    class="get-started-txt relative font-semibold text-primary dark:text-white"
+                    class="get-started-txt relative font-semibold "
                   >Get started
                   </span>
                 </a>
