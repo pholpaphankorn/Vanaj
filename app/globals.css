@@ -4,13 +4,10 @@
 
 body {
   color: #f8f8f8;
-  @apply bg-fs-lemon-grass;
+  @apply bg-fs-green;
 }
 
-body input,
-body textarea {
-  color: black;
-}
+
 
 p {
   margin: 8px 0;
@@ -37,14 +34,14 @@ p {
   background: #555;
 }
 nav{
- @apply bg-fs-ash;
+ @apply bg-fs-red;
 }
  .vanaj-logo-txt {
-  @apply text-fs-red;
+  @apply text-fs-grey;
 }
 
 .get-started-txt {
-  color: white;
+  @apply text-white;
 
   
 }
@@ -59,12 +56,12 @@ nav{
 }
 
 .hero-content {
-  @apply text-fs-tobacco-brown;
+  @apply text-fs-brown;
 
 }
 
 .vanaj-name-txt{
-  color: black;
+  @apply text-white;
 }
 .chat-message-vanaj-color{
   @apply bg-white text-black;
@@ -77,18 +74,18 @@ nav{
 }
 
 .text-area-chat{
-  @apply bg-white text-black placeholder-fs-tobacco-brown focus:outline-none;
+  @apply bg-white text-black placeholder-fs-grey focus:outline-none rounded-lg ;
 
 
 }
 .text-area-container{
-  @apply bg-fs-red;
+  @apply bg-fs-red p-2 lg:rounded-t-xl;
 }
 .status-txt{
-@apply text-fs-tobacco-brown;
+@apply text-fs-grey;
 }
 .chat-window{
-  @apply bg-fs-bud rounded-xl;
+  @apply bg-fs-green rounded-xl;
 
 }
 
@@ -143,7 +140,7 @@ nav{
       @apply w-7 h-7;
     }
     .status-chat-size{
-      @apply w-1.5 h-1.5;
+      @apply w-0.5 h-0.5;
       @apply bottom-0 right-2;
     }
 

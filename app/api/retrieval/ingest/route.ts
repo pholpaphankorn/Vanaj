@@ -45,7 +45,7 @@ export async function POST(req: NextRequest) {
     });
 
     const splitDocuments = await splitter.createDocuments([text]);
-
+    await SupabaseVectorStore.delete(15)
     const vectorstore = await SupabaseVectorStore.fromDocuments(
       splitDocuments,
       new OpenAIEmbeddings(),
