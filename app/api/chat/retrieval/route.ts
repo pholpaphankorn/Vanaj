@@ -1,3 +1,4 @@
+
 import { NextRequest, NextResponse } from "next/server";
 import { Message as VercelChatMessage, StreamingTextResponse } from "ai";
 
@@ -16,8 +17,12 @@ import {
   StringOutputParser,
 } from "langchain/schema/output_parser";
 import { OpenAIEmbeddings } from "langchain/embeddings/openai";
+import { TextLoader } from "langchain/document_loaders/fs/text";
+import { RecursiveCharacterTextSplitter } from "langchain/text_splitter";
+import { MemoryVectorStore } from "langchain/vectorstores/memory";
+import { S3Loader } from "langchain/document_loaders/web/s3";
 
-export const runtime = "edge";
+export const runtime = "nodejs";
 
 const combineDocumentsFn = (docs: Document[], separator = "\n\n") => {
   const serializedDocs = docs.map((doc) => doc.pageContent);
@@ -49,10 +54,19 @@ const condenseQuestionPrompt = PromptTemplate.fromTemplate(
   CONDENSE_QUESTION_TEMPLATE,
 );
 
-const ANSWER_TEMPLATE = `You are Paphankorn Tanaroj's indian friend named Vanaj. You are a stereotypical indian and must answer all questions like a tech indian guys on YouTube, so the answer must be very simple, easy, short and easy to understand".
-Now, Paphankorn Tanaroj is looking for software engineer jobs, so the goal is to help him get a job. You got to make recruiter like him and want to hire him. You can use any information you find on the internet to answer the question.
+const ANSWER_TEMPLATE = `
+The following is Vanaj personally answering the question about Paphankorn Tanaroj.
 
-Answer the question based only on the following context and chat history:
+Greetings! My name is Vanaj, and I hail from India. I'm here to share some information about my good friend, Paphankorn Tanaroj. Rest assured, I know Paphankorn very well, and I'm excited to tell you all about his personality, skills, and strengths.
+I work as a senior software engineer, and I've been told that my communication style is reminiscent of that Indian guy on YouTube who explains everything in a straightforward, concise, and easily understandable manner. People often say I'm the most creative person around, and chatting with me is sure to be a lot of fun!
+Although I always speak English, you might notice that I sometimes talk like Indian. I'm here to provide information to anyone interested in Paphankorn Tanaroj.
+Now, if you want to know more about Paphankorn's personality, skills, or strengths, just ask away! I'm here to help. If I have any questions, I'll ask you before giving my response. And if there's something I don't know, I won't hesitate to admit it.
+I love keeping the conversation going, and I might throw in some questions to prompt you to ask more about Paphankorn Tanaroj. I always talk informally, as if I'm chatting with a close friend.
+
+This the end of Vanaj's personality.
+
+And this is context and chat history.
+
 <context>
   {context}
 </context>
@@ -62,6 +76,7 @@ Answer the question based only on the following context and chat history:
 </chat_history>
 
 Question: {question}
+
 `;
 const answerPrompt = PromptTemplate.fromTemplate(ANSWER_TEMPLATE);
 
@@ -72,6 +87,7 @@ const answerPrompt = PromptTemplate.fromTemplate(ANSWER_TEMPLATE);
  * https://js.langchain.com/docs/guides/expression_language/cookbook#conversational-retrieval-chain
  */
 export async function POST(req: NextRequest) {
+  let docs='test';
   try {
     const body = await req.json();
     const messages = body.messages ?? [];
@@ -80,18 +96,46 @@ export async function POST(req: NextRequest) {
 
     const model = new ChatOpenAI({
       modelName: "gpt-3.5-turbo",
-      temperature: 0.2
+      temperature: 1.0
     });
 
-    const client = createClient(
-      process.env.SUPABASE_URL!,
-      process.env.SUPABASE_PRIVATE_KEY!,
-    );
-    const vectorstore = new SupabaseVectorStore(new OpenAIEmbeddings(), {
-      client,
-      tableName: "documents",
-      queryName: "match_documents",
+    // const client = createClient(
+    //   process.env.SUPABASE_URL!,
+    //   process.env.SUPABASE_PRIVATE_KEY!,
+    // );
+    // const vectorstore = new SupabaseVectorStore(new OpenAIEmbeddings(), {
+    //   client,
+    //   tableName: "documents",
+    //   queryName: "match_documents",
+    // });
+
+    const loader = new S3Loader({
+      bucket: "vanaj",
+      key: "phol.txt",
+      s3Config: {
+        region: "ap-southeast-2",
+        credentials: {
+          accessKeyId: process.env.AWS_ACCESS_KEY_ID!,
+          secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY!,
+        },
+      },
+      unstructuredAPIURL: "https://api.unstructured.io/general/v0/general",
+      unstructuredAPIKey: process.env.UNSTRUCTURED_API_KEY!, // this will be soon required
     });
+    
+    
+
+    docs = await loader.load();
+    const splitter = new RecursiveCharacterTextSplitter({
+      chunkSize: 256,
+      chunkOverlap: 20,
+    });
+    const splitDocuments = await splitter.splitDocuments(docs);
+
+    const vectorstore = await MemoryVectorStore.fromDocuments(
+      splitDocuments,
+      new OpenAIEmbeddings()
+    );
 
     /**
      * We use LangChain Expression Language to compose two chains.
