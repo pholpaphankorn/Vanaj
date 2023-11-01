@@ -1,80 +1,44 @@
-import { ChatWindow } from "@/components/ChatWindow";
 
+
+import { Navbar } from "@/components/Navbar";
+import Link from "next/link";
 export default function Home() {
-  const InfoCard = (
-    <div className="p-4 md:p-8 rounded bg-[#25252d] w-full max-h-[85%] overflow-hidden">
-      <h1 className="text-3xl md:text-4xl mb-4">
-        ▲ Next.js + LangChain.js 🦜🔗
-      </h1>
-      <ul>
-        <li className="text-l">
-          🤝
-          <span className="ml-2">
-            This template showcases a simple chatbot using{" "}
-            <a href="https://js.langchain.com/" target="_blank">
-              LangChain.js
-            </a>{" "}
-            and the Vercel{" "}
-            <a href="https://sdk.vercel.ai/docs" target="_blank">
-              AI SDK
-            </a>{" "}
-            in a{" "}
-            <a href="https://nextjs.org/" target="_blank">
-              Next.js
-            </a>{" "}
-            project.
-          </span>
-        </li>
-        <li className="hidden text-l md:block">
-          💻
-          <span className="ml-2">
-            You can find the prompt and model logic for this use-case in{" "}
-            <code>app/api/chat/route.ts</code>.
-          </span>
-        </li>
-        <li>
-          🏴‍☠️
-          <span className="ml-2">
-            By default, the bot is pretending to be a pirate, but you can change
-            the prompt to whatever you want!
-          </span>
-        </li>
-        <li className="hidden text-l md:block">
-          🎨
-          <span className="ml-2">
-            The main frontend logic is found in <code>app/page.tsx</code>.
-          </span>
-        </li>
-        <li className="text-l">
-          🐙
-          <span className="ml-2">
-            This template is open source - you can see the source code and
-            deploy your own version{" "}
-            <a
-              href="https://github.com/langchain-ai/langchain-nextjs-template"
-              target="_blank"
-            >
-              from the GitHub repo
-            </a>
-            !
-          </span>
-        </li>
-        <li className="text-l">
-          👇
-          <span className="ml-2">
-            Try asking e.g. <code>What is it like to be a pirate?</code> below!
-          </span>
-        </li>
-      </ul>
-    </div>
-  );
+
   return (
-    <ChatWindow
-      endpoint="api/chat"
-      emoji="🏴‍☠️"
-      titleText="Patchy the Chatty Pirate"
-      placeholder="I'm an LLM pretending to be a pirate! Ask me about the pirate life!"
-      emptyStateComponent={InfoCard}
-    ></ChatWindow>
+    <div>
+      <Navbar chat={false} />
+      <div className="relative" id="home">
+        <div>
+          <div className="relative pt-24 sm:pt-36 ml-auto">
+            <div className="lg:w-2/3 text-center mx-auto">
+              <h1 className="hero-header font-bold ml-4 mr-4">Ask me anything about <span className="text-fs-red">Paphankorn</span></h1>
+              <p className="hero-content mt-8 ml-8 mr-8">
+                Hey there! I&apos;m Vanaj, all the way from India. I&apos;m tight with Paphankorn Tanaroj, and let me tell you, he&apos;s one incredible dude. So go ahead, fire away any questions you have about him, and I'll do my best to help you out. And oh, just a little fun fact for you – ChatGPT happens to be my brother!
+              </p>
+
+              <div className="mt-12 mb-12 sm:mt-16 sm:mb-16 flex flex-wrap justify-center gap-y-4 gap-x-6">
+
+                <Link
+                  href="/chat"
+                  className="get-started-btn relative flex h-11 items-center justify-center px-6 before:absolute before:inset-0 rounded-full   sm:w-max"
+                >
+                  <span
+                    className="get-started-txt relative font-semibold "
+                  >Get started
+                  </span>
+                </Link>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+
   );
 }
+
+

@@ -1,16 +1,24 @@
 "use client";
+import { ProfileCard } from "@/components/ProfileCard";
+export function Navbar(props: { chat: Boolean ,handleLoad:any,display:string,imgRef:any}) {
 
-import { usePathname } from 'next/navigation';
-
-export function Navbar() {
-  const pathname = usePathname();
   return (
-    <nav className="mb-4">
-      <a className={`mr-4 ${pathname === "/" ? "text-white border-b" : ""}`} href="/">🏴‍☠️ Chat</a>
-      <a className={`mr-4 ${pathname === "/structured_output" ? "text-white border-b" : ""}`} href="/structured_output">🧱 Structured Output</a>
-      <a className={`mr-4 ${pathname === "/agents" ? "text-white border-b" : ""}`} href="/agents">🦜 Agents</a>
-      <a className={`mr-4 ${pathname === "/retrieval" ? "text-white border-b" : ""}`} href="/retrieval">🐶 Retrieval</a>
-      <a className={`mr-4 ${pathname === "/retrieval_agents" ? "text-white border-b" : ""}`} href="/retrieval_agents">🤖 Retrieval Agents</a>
-    </nav>
+
+<nav className={`fixed w-full z-20 ${props.display} `}>
+  <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8 ">
+    <div className="relative flex navbar-container-height items-center justify-between">
+    {props.chat ? <ProfileCard active={true} handleLoad={props.handleLoad} imgRef={props.imgRef}/> :
+<h3 className="vanaj-logo-txt font-bold text-black ml-1">
+   Vanaj
+</h3>}
+    </div>
+  </div>
+</nav>
+
   );
 }
+
+
+
+
+// }

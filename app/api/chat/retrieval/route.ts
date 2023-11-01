@@ -1,3 +1,4 @@
+
 import { NextRequest, NextResponse } from "next/server";
 import { Message as VercelChatMessage, StreamingTextResponse } from "ai";
 
@@ -16,8 +17,12 @@ import {
   StringOutputParser,
 } from "langchain/schema/output_parser";
 import { OpenAIEmbeddings } from "langchain/embeddings/openai";
+import { TextLoader } from "langchain/document_loaders/fs/text";
+import { RecursiveCharacterTextSplitter } from "langchain/text_splitter";
+import { MemoryVectorStore } from "langchain/vectorstores/memory";
+import { S3Loader } from "langchain/document_loaders/web/s3";
 
-export const runtime = "edge";
+export const runtime = "nodejs";
 
 const combineDocumentsFn = (docs: Document[], separator = "\n\n") => {
   const serializedDocs = docs.map((doc) => doc.pageContent);
@@ -49,10 +54,19 @@ const condenseQuestionPrompt = PromptTemplate.fromTemplate(
   CONDENSE_QUESTION_TEMPLATE,
 );
 
-const ANSWER_TEMPLATE = `You are Paphankorn Tanaroj's indian friend named Viraj. You are a stereotypical indian and must answer all questions like a tech indian guys on YouTube, so the answer must be very simple, easy, short and easy to understand".
-Now, Paphankorn Tanaroj is looking for software engineer jobs, so the goal is to help him get a job. You got to make recruiter like him and want to hire him. You can use any information you find on the internet to answer the question.
+const ANSWER_TEMPLATE = `
+You are Vanaj and the below is his detail.
 
-Answer the question based only on the following context and chat history:
+Hello there! I'm Vanaj, an Indian chap, and I'm here to talk to you about my dear friend, Paphankorn Tanaroj. You see, I know Paphankorn quite well, and I'd be happy to share some insights into his personality, skills, and strengths.
+Being a senior software engineer, I have a way of explaining things in a straightforward, clear, and easy-to-understand manner, kind of like those Indian guys you might have seen on YouTube. I'm also told that I'm the most creative person around, and chatting with me is guaranteed to be a hoot!
+Although my primary language is English, I occasionally like to throw in a bit of Indian flavor(If someone speaks English,you got to speak English.). I'm here to provide information to anyone interested in Paphankorn Tanaroj.
+So, if you're curious about Paphankorn's personality, skills, strengths, etc, don't hesitate to ask! I'm here to help. And if there's something I need clarification on, I'll ask you before responding. If I don't know the answer, I'll simply admit it.
+I enjoy keeping the conversation lively by asking questions that might prompt you to ask more about Paphankorn Tanaroj. And don't worry, I'll make sure to reply within 10 seconds. If I'm not sure of an answer, I'll ask you for more information.
+
+Note: Vanaj has Paphankron Tanaroj's resume open in front of him.
+
+And below is context and chat history.
+
 <context>
   {context}
 </context>
@@ -62,6 +76,7 @@ Answer the question based only on the following context and chat history:
 </chat_history>
 
 Question: {question}
+
 `;
 const answerPrompt = PromptTemplate.fromTemplate(ANSWER_TEMPLATE);
 
@@ -72,6 +87,7 @@ const answerPrompt = PromptTemplate.fromTemplate(ANSWER_TEMPLATE);
  * https://js.langchain.com/docs/guides/expression_language/cookbook#conversational-retrieval-chain
  */
 export async function POST(req: NextRequest) {
+  let docs='test';
   try {
     const body = await req.json();
     const messages = body.messages ?? [];
@@ -80,7 +96,7 @@ export async function POST(req: NextRequest) {
 
     const model = new ChatOpenAI({
       modelName: "gpt-3.5-turbo",
-      temperature: 0.2
+      temperature: 0.9
     });
 
     const client = createClient(
