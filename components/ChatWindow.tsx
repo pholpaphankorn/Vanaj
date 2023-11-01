@@ -13,6 +13,11 @@ import { UploadDocumentsForm } from "@/components/UploadDocumentsForm";
 import { IntermediateStep } from "./IntermediateStep";
 
 import { AutoResizeTextarea } from "@/components/AutoResizeTextarea";
+import { Navbar } from "@/components/Navbar";
+import LoadingScreen from "@/components/LoadingScreen";
+import ApologyScreen from "@/components/ApologyScreen";
+
+
 
 export function ChatWindow(props: {
   endpoint: string,
@@ -38,6 +43,15 @@ export function ChatWindow(props: {
 
   const [sourcesForMessages, setSourcesForMessages] = useState<Record<string, any>>({});
 
+  const [imageProfileisLoaded, setImageProfileIsLoaded] = useState(false);
+
+  const [IsWaitingPageVisible, setIsWaitingPageVisible] = useState(false);
+
+  const imgRef = useRef();
+
+  const waitDuration = 20000; 
+  const timeoutIdRef = useRef();
+
   const { messages, input, setInput, handleInputChange, handleSubmit, isLoading: chatEndpointIsLoading, setMessages } =
     useChat({
       api: endpoint,
@@ -51,6 +65,10 @@ export function ChatWindow(props: {
         // console.log(e)
       }
     });
+  async function handleLoadProfileImage() {
+
+    setImageProfileIsLoaded(true);
+  }
   async function onEnter(e: any) {
     if (e.key === 'Enter' && !e.shiftKey) {
       await sendMessage(e);
@@ -80,12 +98,42 @@ export function ChatWindow(props: {
 
   }
   useEffect(() => {
+    if (imgRef.current && imgRef.current.complete) {
+      // If the image is already loaded, set to true
+      setImageProfileIsLoaded(true);
+    }
+  }, []);
+    
+  useEffect(() => {
+    clearTimeout(timeoutIdRef.current);
     if (messageContainerRef.current) {
       messageContainerRef.current?.scrollIntoView({ behavior: "smooth", block: "end" });
     }
+    
   }, [messages]);
-  return (
 
+  useEffect(() => {
+    if (chatEndpointIsLoading) {
+      // Set a timeout to show the waiting page after the wait duration
+      timeoutIdRef.current = setTimeout(() => {
+        setIsWaitingPageVisible(true);
+      }, waitDuration);
+    } else {
+      // Clear the timeout when chatEndpointIsLoading becomes false
+      clearTimeout(timeoutIdRef.current);
+    }
+
+    return () => {
+      // Clear the timeout when the component is unmounted
+      clearTimeout(timeoutIdRef.current);
+    };
+  }, [chatEndpointIsLoading]);
+  return (
+    <>
+    {IsWaitingPageVisible && <ApologyScreen />}
+    {!IsWaitingPageVisible&&<Navbar chat={true} handleLoad={handleLoadProfileImage} display={`${imageProfileisLoaded?"":"hidden"}`} imgRef={imgRef}/>}
+    {!imageProfileisLoaded&&!IsWaitingPageVisible&& <LoadingScreen/>}
+    {imageProfileisLoaded&&!IsWaitingPageVisible && (
     <div className={`chat-window flex flex-col items-center p-4 md:p-8 rounded grow mx-auto sm:max-w-5xl sm:px-4 p-4 md:p-12 min-h-[100vh] `}>
       <div
         className="flex w-full"
@@ -152,81 +200,16 @@ export function ChatWindow(props: {
             </button>
           </div>
         </form>
-        {/* <form
-  className="flex w-full items-center rounded-md bg-slate-200 p-2 dark:bg-slate-900"
->
-  <AutoResizeTextarea
-          className="text-area-chat block w-full resize-none rounded-xl border-none bg-slate-200  text-slate-900 shadow-md focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-slate-800 dark:text-slate-200 dark:placeholder-slate-400 dark:focus:ring-blue-500"
-          value={input}
-          maxRows={5}
-          placeholder={placeholder}
-          onChange={handleInputChange}
-          
-        />
-  <div>
-    <button
-      className="inline-flex hover:text-blue-600 dark:text-slate-200 dark:hover:text-blue-600 sm:p-2"
-      type="submit"
-    >
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        className="h-6 w-6"
-        aria-hidden="true"
-        viewBox="0 0 24 24"
-        strokeWidth="2"
-        stroke="currentColor"
-        fill="none"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      >
-        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-        <path d="M10 14l11 -11"></path>
-        <path
-          d="M21 3l-6.5 18a.55 .55 0 0 1 -1 0l-3.5 -7l-7 -3.5a.55 .55 0 0 1 0 -1l18 -6.5"
-        ></path>
-      </svg>
-      <span className="sr-only">Send message</span>
-    </button>
-
-  </div>
-</form> */}
-{/* <form>
-  <label htmlFor="chat-input" className="sr-only">Enter prompt</label>
-  <div className="flex gap-x-2">
-  <AutoResizeTextarea
-          className="text-area-chat block w-full resize-none rounded-xl border-none bg-slate-200  text-slate-900 shadow-md focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-slate-800 dark:text-slate-200 dark:placeholder-slate-400 dark:focus:ring-blue-500"
-          value={input}
-          maxRows={5}
-          placeholder={placeholder}
-          onChange={handleInputChange}
-          
-        />
-    <button
-      type="submit"
-      className="rounded-lg border border-transparent bg-blue-600 px-3 py-1 text-slate-200 hover:bg-blue-700 focus:outline-none focus:ring-4 focus:ring-blue-300"
-    >
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        className="h-5 w-5"
-        viewBox="0 0 24 24"
-        strokeWidth="2"
-        stroke="currentColor"
-        fill="none"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      >
-        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-        <path d="M10 14l11 -11"></path>
-        <path
-          d="M21 3l-6.5 18a.55 .55 0 0 1 -1 0l-3.5 -7l-7 -3.5a.55 .55 0 0 1 0 -1l18 -6.5"
-        ></path>
-      </svg>
-      <span className="sr-only">Enter prompt</span>
-    </button>
-  </div>
-</form> */}
       </div>
-      {/* <ToastContainer/> */}
-    </div>
+
+    </div>)}
+  
+    
+
+    </>
+    
+    
+
+
   );
 }

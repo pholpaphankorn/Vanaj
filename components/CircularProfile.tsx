@@ -1,4 +1,4 @@
-export function CircularProfile(props: { active: Boolean, type?: string}){
+export function CircularProfile(props: { active: Boolean, type?: string,handleLoad:any,imgRef:any}){
 
     return (
         <div className={`relative inline-flex shrink-0 ${props.type=='profile'?"self-center":""}`}>
@@ -6,8 +6,10 @@ export function CircularProfile(props: { active: Boolean, type?: string}){
           className={`status-${props.type}-size ${props.type=='profile'?"border-fs-red":"border-fs-green"} border border-2 w-3 h-3 absolute rounded-full bg-green-600 dark:bg-green-600 dark:text-slate-100`}
         ></span>:null}
         <img
+          ref={props.imgRef}
           className={`image-${props.type}-size mr-2 rounded-full `}
-          src="https://source.unsplash.com/40x40/?portrait"
+          src="/images/Vanaj.jpg"
+          onLoad={props.handleLoad}
         />
       </div>
     );
