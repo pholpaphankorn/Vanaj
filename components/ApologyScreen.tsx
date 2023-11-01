@@ -2,9 +2,9 @@ import React from 'react';
 
 const ApologyScreen = () => {
     return (
-        <div class="apology-container">
-        <div class="apology-icon">😟</div>
-        <p class="apology-message">We're sorry, For some reason, Vanaj doesn't want to talk to you. Please try again later.</p>
+        <div className="apology-container">
+        <div className="apology-icon">😟</div>
+        <p className="apology-message">We&apos;re sorry, For some reason, Vanaj doesn&apos;t want to talk to you. Please try again later.</p>
       </div>
     );
 };

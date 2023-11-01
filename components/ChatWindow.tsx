@@ -47,10 +47,10 @@ export function ChatWindow(props: {
 
   const [IsWaitingPageVisible, setIsWaitingPageVisible] = useState(false);
 
-  const imgRef = useRef();
+  const imgRef = useRef<HTMLImageElement>(null);
 
   const waitDuration = 20000; 
-  const timeoutIdRef = useRef();
+  const timeoutIdRef = useRef<NodeJS.Timeout | null>(null);
 
   const { messages, input, setInput, handleInputChange, handleSubmit, isLoading: chatEndpointIsLoading, setMessages } =
     useChat({
@@ -98,16 +98,16 @@ export function ChatWindow(props: {
 
   }
   useEffect(() => {
-    if (imgRef.current && imgRef.current.complete) {
+    if (imgRef!.current && imgRef!.current!.complete) {
       // If the image is already loaded, set to true
       setImageProfileIsLoaded(true);
     }
   }, []);
     
   useEffect(() => {
-    clearTimeout(timeoutIdRef.current);
-    if (messageContainerRef.current) {
-      messageContainerRef.current?.scrollIntoView({ behavior: "smooth", block: "end" });
+    clearTimeout(timeoutIdRef!.current as unknown as number);
+    if (messageContainerRef!.current) {
+      messageContainerRef!.current?.scrollIntoView({ behavior: "smooth", block: "end" });
     }
     
   }, [messages]);
@@ -115,17 +115,17 @@ export function ChatWindow(props: {
   useEffect(() => {
     if (chatEndpointIsLoading) {
       // Set a timeout to show the waiting page after the wait duration
-      timeoutIdRef.current = setTimeout(() => {
+      timeoutIdRef!.current = setTimeout(() => {
         setIsWaitingPageVisible(true);
       }, waitDuration);
     } else {
       // Clear the timeout when chatEndpointIsLoading becomes false
-      clearTimeout(timeoutIdRef.current);
+      clearTimeout(timeoutIdRef!.current as unknown as number);
     }
 
     return () => {
       // Clear the timeout when the component is unmounted
-      clearTimeout(timeoutIdRef.current);
+      clearTimeout(timeoutIdRef!.current as unknown as number);
     };
   }, [chatEndpointIsLoading]);
   return (

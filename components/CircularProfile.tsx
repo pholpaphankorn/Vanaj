@@ -1,4 +1,4 @@
-export function CircularProfile(props: { active: Boolean, type?: string,handleLoad:any,imgRef:any}){
+export function CircularProfile(props: { active: Boolean, type?: string,handleLoad?:any,imgRef?:any}){
 
     return (
         <div className={`relative inline-flex shrink-0 ${props.type=='profile'?"self-center":""}`}>
