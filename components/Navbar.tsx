@@ -1,6 +1,6 @@
 "use client";
 import { ProfileCard } from "@/components/ProfileCard";
-export function Navbar(props: { chat: Boolean ,handleLoad:any,display:string,imgRef:any}) {
+export function Navbar(props: { chat: Boolean ,handleLoad?:any,display?:string,imgRef?:any}) {
 
   return (
 
