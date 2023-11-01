@@ -1,12 +1,12 @@
 import { CircularProfile } from "@/components/CircularProfile";
-export function ProfileCard(props: { active: Boolean }) {
+export function ProfileCard(props: { active: Boolean ,handleLoad:any,imgRef:any}) {
     return (
         <div
             className="w-full max-w-sm rounded-lg py-2 ml-1"
         >
             <div className="flex items-center">
                 <div className="flex ">
-                    <CircularProfile active={true} type="profile"/>
+                    <CircularProfile active={true} type="profile" handleLoad={props.handleLoad} imgRef={props.imgRef}/>
 
                     <div className="ml-2 flex flex-col 2gap-y-">
                         <h3 className="vanaj-name-txt font-bold text-black">

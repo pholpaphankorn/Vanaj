@@ -4,8 +4,11 @@ import { RecursiveCharacterTextSplitter } from "langchain/text_splitter";
 import { createClient } from "@supabase/supabase-js";
 import { SupabaseVectorStore } from "langchain/vectorstores/supabase";
 import { OpenAIEmbeddings } from "langchain/embeddings/openai";
+import { TextLoader } from "langchain/document_loaders/fs/text";
+import { PDFLoader } from "langchain/document_loaders/fs/pdf";
+import { DocxLoader } from "langchain/document_loaders/fs/docx";
 
-export const runtime = "edge";
+export const runtime = "nodejs";
 
 // Before running, follow set-up instructions at
 // https://js.langchain.com/docs/modules/indexes/vector_stores/integrations/supabase
@@ -18,19 +21,11 @@ export const runtime = "edge";
  * https://js.langchain.com/docs/modules/data_connection/vectorstores/integrations/supabase
  */
 export async function POST(req: NextRequest) {
-  const body = await req.json();
-  const text = body.text;
-
-  if (process.env.NEXT_PUBLIC_DEMO === "true") {
-    return NextResponse.json(
-      {
-        error: [
-          "Ingest is not supported in demo mode.",
-          "Please set up your own version of the repo here: https://github.com/langchain-ai/langchain-nextjs-template",
-        ].join("\n"),
-      },
-      { status: 403 },
-    );
+  const data = await req.formData()
+  const blob: Blob | null = data.get('file') as unknown as Blob
+  const file_extension = data.get('file_extension') as unknown as string
+  if (!blob) {
+    return NextResponse.json({ success: false }, { status: 500 })
   }
 
   try {
@@ -38,14 +33,30 @@ export async function POST(req: NextRequest) {
       process.env.SUPABASE_URL!,
       process.env.SUPABASE_PRIVATE_KEY!,
     );
+    var loader;
+    if (file_extension=='txt'){
+     loader = new TextLoader(blob);
+    }else if (file_extension=='pdf'){
+     loader = new PDFLoader(blob);
+    }else if (file_extension=='docx'){
+     loader = new DocxLoader(blob);
+    }else{
+    return NextResponse.json({ error: 'File extension not supported' }, { status: 500 });
+    }
+    if (loader==null){
+      return NextResponse.json({ error: 'Failed loading file' }, { status: 500 });
+    }
+    const docs = await loader.load();
 
-    const splitter = RecursiveCharacterTextSplitter.fromLanguage("markdown", {
+    const splitter = new RecursiveCharacterTextSplitter({
       chunkSize: 256,
       chunkOverlap: 20,
     });
 
-    const splitDocuments = await splitter.createDocuments([text]);
-    await SupabaseVectorStore.delete(15)
+    const splitDocuments = await splitter.splitDocuments(docs);
+
+
+
     const vectorstore = await SupabaseVectorStore.fromDocuments(
       splitDocuments,
       new OpenAIEmbeddings(),

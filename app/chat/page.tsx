@@ -1,10 +1,10 @@
 import { ChatWindow } from "@/components/ChatWindow";
-import { Navbar } from "@/components/Navbar";
-import { UploadDocumentsForm } from "@/components/UploadDocumentsForm";
+import WaitingScreen from "@/components/ApologyScreen";
+
 export default function ChatPage() {
   return (
     <div className="bg-fs-dark-green">
-      <Navbar chat={true}></Navbar>
+
       
       <ChatWindow
         endpoint="api/chat/retrieval"
@@ -13,6 +13,8 @@ export default function ChatPage() {
 
 
       ></ChatWindow>
+
+      {/* <WaitingScreen/> */}
       
     </div>
 
