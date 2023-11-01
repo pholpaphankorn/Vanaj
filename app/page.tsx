@@ -24,7 +24,7 @@ export default function Home() {
                 >
                   <span
                     className="get-started-txt relative font-semibold "
-                  >Get started
+                  >Get Started
                   </span>
                 </Link>
 
