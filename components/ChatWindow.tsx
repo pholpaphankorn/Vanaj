@@ -62,7 +62,7 @@ export function ChatWindow(props: {
         
       },
       onError: (e) => {
-        // console.log(e)
+        setIsWaitingPageVisible(true);
       }
     });
   async function handleLoadProfileImage() {
