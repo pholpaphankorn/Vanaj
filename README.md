@@ -1,1 +1,1 @@
-[Vanaj is my personal chatbot](https://vanaj.vercel.app)
+[Vanaj is my Indian friend.](https://vanaj.vercel.app)
