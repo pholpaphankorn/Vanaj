@@ -1,7 +1,7 @@
 import type { Message } from "ai/react";
 import {CircularProfile} from "@/components/CircularProfile";
 
-export function ChatMessageBubble(props: { message: Message, aiEmoji?: string, sources: any[] }) {
+export function ChatMessageBubble(props: { message: Message}) {
   const colorClassName =
     props.message.role === "user" ? "chat-message-user-color" : "chat-message-vanaj-color ";
   const alignmentClassName =

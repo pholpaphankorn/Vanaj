@@ -1,7 +1,6 @@
 'use client';
 
 
-import { Navbar } from "@/components/Navbar";
 import { UploadDocumentsForm } from "@/components/UploadDocumentsForm";
 import { useState } from "react";
 export default function RetrievalPage() {

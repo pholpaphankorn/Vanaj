@@ -10,17 +10,12 @@ import { SupabaseVectorStore } from "langchain/vectorstores/supabase";
 import { Document } from "langchain/document";
 import {
   RunnableSequence,
-  RunnablePassthrough,
 } from "langchain/schema/runnable";
 import {
   BytesOutputParser,
   StringOutputParser,
 } from "langchain/schema/output_parser";
 import { OpenAIEmbeddings } from "langchain/embeddings/openai";
-import { TextLoader } from "langchain/document_loaders/fs/text";
-import { RecursiveCharacterTextSplitter } from "langchain/text_splitter";
-import { MemoryVectorStore } from "langchain/vectorstores/memory";
-import { S3Loader } from "langchain/document_loaders/web/s3";
 
 export const runtime = "nodejs";
 

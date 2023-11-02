@@ -1,5 +1,5 @@
 import { ChatWindow } from "@/components/ChatWindow";
-import WaitingScreen from "@/components/ApologyScreen";
+
 
 export default function ChatPage() {
   return (
@@ -8,13 +8,8 @@ export default function ChatPage() {
       
       <ChatWindow
         endpoint="api/chat/retrieval"
-        titleText="Vanaj"
         placeholder="Ask me some questions!"
-
-
       ></ChatWindow>
-
-      {/* <WaitingScreen/> */}
       
     </div>
 

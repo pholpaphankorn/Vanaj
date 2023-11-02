@@ -6,11 +6,11 @@ import 'react-toastify/dist/ReactToastify.css';
 import { useChat } from "ai/react";
 import { useRef, useState, useEffect, ReactElement } from "react";
 import type { FormEvent } from "react";
-import type { AgentStep } from "langchain/schema";
+
 
 import { ChatMessageBubble } from "@/components/ChatMessageBubble";
 import { UploadDocumentsForm } from "@/components/UploadDocumentsForm";
-import { IntermediateStep } from "./IntermediateStep";
+
 
 import { AutoResizeTextarea } from "@/components/AutoResizeTextarea";
 import { Navbar } from "@/components/Navbar";
@@ -22,26 +22,10 @@ import ApologyScreen from "@/components/ApologyScreen";
 export function ChatWindow(props: {
   endpoint: string,
   placeholder?: string,
-  titleText?: string,
-  emoji?: string;
-  showIngestForm?: boolean,
-  showIntermediateStepsToggle?: boolean
 }) {
   const messageContainerRef = useRef<HTMLDivElement | null>(null);
 
-  const { endpoint, placeholder, titleText = "An LLM", showIngestForm, showIntermediateStepsToggle, emoji } = props;
-
-  const [showIntermediateSteps, setShowIntermediateSteps] = useState(false);
-  const [intermediateStepsLoading, setIntermediateStepsLoading] = useState(false);
-  const ingestForm = showIngestForm && <UploadDocumentsForm></UploadDocumentsForm>;
-  const intemediateStepsToggle = showIntermediateStepsToggle && (
-    <div>
-      <input type="checkbox" id="show_intermediate_steps" name="show_intermediate_steps" checked={showIntermediateSteps} onChange={(e) => setShowIntermediateSteps(e.target.checked)}></input>
-      <label htmlFor="show_intermediate_steps"> Show intermediate steps</label>
-    </div>
-  );
-
-  const [sourcesForMessages, setSourcesForMessages] = useState<Record<string, any>>({});
+  const { endpoint, placeholder } = props;
 
   const [imageProfileisLoaded, setImageProfileIsLoaded] = useState(false);
 
@@ -55,13 +39,6 @@ export function ChatWindow(props: {
   const { messages, input, setInput, handleInputChange, handleSubmit, isLoading: chatEndpointIsLoading, setMessages } =
     useChat({
       api: endpoint,
-      onResponse(response) {
-        const sourcesHeader = response.headers.get("x-sources");
-        const sources = sourcesHeader ? JSON.parse(atob(sourcesHeader)) : [];
-        const messageIndexHeader = response.headers.get("x-message-index");
-        
-        
-      },
       onError: (e) => {
         setIsWaitingPageVisible(true);
       }
@@ -89,8 +66,6 @@ export function ChatWindow(props: {
     const os=getMobileOperatingSystem();
     if (e.key === 'Enter' && !e.shiftKey && os=='unknown') {
       await sendMessage(e);
-    }else{
-      return;
     }
   }
   async function sendMessage(e: FormEvent<HTMLFormElement>) {
@@ -108,12 +83,6 @@ export function ChatWindow(props: {
     }
 
     handleSubmit(e);
-    // Some extra work to show intermediate steps properly
-    // const newMessages = messages.concat({ id: messages.length.toString() + 'user', content: input, role: "user" });
-    // const replyMessages = messages.concat({ id: messages.length.toString() + 'vanaj', content: input, role: "Vanaj" });
-    // setMessages([...newMessages, ...replyMessages]);
-    
-
 
   }
   useEffect(() => {
@@ -161,7 +130,7 @@ export function ChatWindow(props: {
               .map((m, i) => {
                 const sourceKey = (messages.length - 1 - i).toString();
                 return (
-                  <ChatMessageBubble key={m.id} message={m} aiEmoji={emoji} sources={sourcesForMessages[sourceKey]}></ChatMessageBubble>)
+                  <ChatMessageBubble key={m.id} message={m}></ChatMessageBubble>)
               })
           ) : (
             ""

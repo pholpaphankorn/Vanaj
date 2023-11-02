@@ -1,4 +1,4 @@
 docker build -t vanaj .
 docker run -d -p 3000:3000 -v ./app:/app/app -v ./components:/app/components -v ./.env.local:/app/.env.local -v ./tailwind.config.js:/app/tailwind.config.js -v ./public:/app/public vanaj
-curl "https://numgdijjrerojlheadnc.supabase.co/storage/v1/object/sign/Vanaj/phol.txt?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJWYW5hai9waG9sLnR4dCIsImlhdCI6MTY5ODY3MzYwMiwiZXhwIjoyMDE0MDMzNjAyfQ.fWYaru7qzll2THXRZ4zuKxDfF-KGnI3lPmp4HtUP6DA" --output test.txt
+
 

@@ -37,7 +37,9 @@ export async function POST(req: NextRequest) {
     if (file_extension=='txt'){
      loader = new TextLoader(blob);
     }else if (file_extension=='pdf'){
-     loader = new PDFLoader(blob);
+     loader = new PDFLoader(blob,{
+      splitPages: false,
+     });
     }else if (file_extension=='docx'){
      loader = new DocxLoader(blob);
     }else{
