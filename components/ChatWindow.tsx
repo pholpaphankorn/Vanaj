@@ -33,7 +33,7 @@ export function ChatWindow(props: {
 
   const imgRef = useRef<HTMLImageElement>(null);
 
-  const waitDuration = 20000; 
+  const waitDuration = 30000; 
   const timeoutIdRef = useRef<NodeJS.Timeout | null>(null);
 
   const { messages, input, setInput, handleInputChange, handleSubmit, isLoading: chatEndpointIsLoading, setMessages } =
