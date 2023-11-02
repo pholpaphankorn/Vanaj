@@ -2,9 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+
 body {
   color: #f8f8f8;
-  @apply bg-fs-green;
+  @apply bg-fs-green ;
 }
 
 
@@ -107,7 +108,7 @@ nav{
     }
   
     .vanaj-logo-txt {
-      @apply text-xl;
+      @apply text-2xl;
     }
   
     .navbar-container-height {
@@ -174,7 +175,7 @@ nav{
     }
 
     .vanaj-logo-txt {
-      @apply text-2xl;
+      @apply text-3xl;
     }
     
 
@@ -235,7 +236,7 @@ nav{
     }
 
     .vanaj-logo-txt {
-      @apply text-3xl;
+      @apply text-4xl;
     }
 
     .navbar-container-height{
