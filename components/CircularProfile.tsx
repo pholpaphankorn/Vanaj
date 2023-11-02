@@ -8,7 +8,7 @@ export function CircularProfile(props: { active: Boolean, type?: string,handleLo
         <img
           ref={props.imgRef}
           className={`image-${props.type}-size mr-2 rounded-full `}
-          src="/images/Vanaj.jpg"
+          src="/images/vanaj.jpg"
           onLoad={props.handleLoad}
         />
       </div>
