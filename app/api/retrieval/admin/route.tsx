@@ -19,7 +19,7 @@ export async function POST(req: NextRequest) {
     const password = json.password;
   try {
     const loggedIn=username === process.env.ADMIN_USERNAME! && password === process.env.ADMIN_PASSWORD!
-    return NextResponse.json({ success: loggedIn ,username:process.env.ADMIN_USERNAME!,password:process.env.ADMIN_PASSWORD!  }, { status: 200 });
+    return NextResponse.json({ success: loggedIn }, { status: 200 });
 
 
     
