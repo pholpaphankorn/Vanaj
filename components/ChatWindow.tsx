@@ -33,7 +33,7 @@ export function ChatWindow(props: {
 
   const imgRef = useRef<HTMLImageElement>(null);
 
-  const waitDuration = 25000; 
+  const waitDuration = 20000; 
   const timeoutIdRef = useRef<NodeJS.Timeout | null>(null);
 
   const { messages, input, setInput, handleInputChange, handleSubmit, isLoading: chatEndpointIsLoading, setMessages } =
@@ -107,9 +107,20 @@ export function ChatWindow(props: {
       timeoutIdRef!.current = setTimeout(() => {
         setIsWaitingPageVisible(true);
       }, waitDuration);
-    } 
+    } else{
+      clearTimeout(timeoutIdRef!.current as unknown as number);
+    }
 
-  }, [chatEndpointIsLoading]);
+    if (!imageProfileisLoaded) {
+      // Clear the timeout when the component is unmounted
+      timeoutIdRef!.current = setTimeout(() => {
+        setIsWaitingPageVisible(true);
+      }, waitDuration);
+    }else{
+      clearTimeout(timeoutIdRef!.current as unknown as number);
+    }
+
+  }, [chatEndpointIsLoading,imageProfileisLoaded]);
   return (
     <>
     {IsWaitingPageVisible && <ApologyScreen />}
