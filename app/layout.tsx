@@ -14,7 +14,7 @@ export default function RootLayout({
     <html lang="en">
       <head>
         <title>Vanaj</title>
-        <link rel="shortcut icon" href="/images/favicon.ico" />
+        <link rel="shortcut icon" href="/images/vanaj.jpg" />
         <meta
           name="description"
           content="Starter template showing how to use LangChain in Next.js projects. See source code and deploy your own at https://github.com/langchain-ai/langchain-nextjs-template!"
