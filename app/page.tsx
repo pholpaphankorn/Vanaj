@@ -5,7 +5,7 @@ import Link from "next/link";
 export default function Home() {
 
   return (
-    <div clas>
+    <div>
       <Navbar chat={false} />
 
       <div className="relative flex flex-col " id="home">
