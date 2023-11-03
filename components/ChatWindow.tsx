@@ -82,7 +82,8 @@ export function ChatWindow(props: {
       return;
     }
 
-    handleSubmit(e);
+    // handleSubmit(e);
+
 
   }
   useEffect(() => {
