@@ -61,6 +61,8 @@ nav{
 
 }
 
+
+
 .vanaj-name-txt{
   @apply text-white;
 }
@@ -90,7 +92,24 @@ nav{
 
 }
 
+
+
 @layer base {
+  /* @media (max-height: 700px){
+    .hero-container{
+      @apply mt-12;
+    }
+    } */
+    
+    
+    @media (min-height: 0px){
+      .hero-container{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        @apply overflow-hidden;
+      }
+    }
   @media (min-width: 0px) {
     .hero-header {
       @apply text-4xl;
@@ -114,6 +133,12 @@ nav{
     .navbar-container-height {
       @apply h-12 ;
     }
+    .hero-container{
+
+      height: calc(100vh - 3rem);
+
+    }
+
     .vanaj-name-txt{
       @apply text-sm;
     }
@@ -182,6 +207,11 @@ nav{
     .navbar-container-height{
       @apply h-14;
     }
+    .hero-container{
+
+      height: calc(100vh - 3.5rem);
+
+    }
 
     .vanaj-name-txt{
       @apply text-base;
@@ -241,6 +271,10 @@ nav{
 
     .navbar-container-height{
       @apply h-16;
+    }
+    .hero-container{
+
+      height: calc(100vh - 4rem);
     }
     .vanaj-name-txt{
       @apply text-lg;
