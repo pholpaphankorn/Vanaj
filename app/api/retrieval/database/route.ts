@@ -34,3 +34,23 @@ export async function DELETE(req: NextRequest) {
     return NextResponse.json({ error: e.message}, { status: 500 });
   }
 }
+export async function POST(req: NextRequest) {
+  const message = await req.json();
+
+  try {
+    const client = createClient(
+      process.env.SUPABASE_URL!,
+      process.env.SUPABASE_PRIVATE_KEY!,
+    );
+
+    const { error } = await client.from('questions').insert(message)
+
+    return NextResponse.json({ success:true }, { status: 200 });
+
+  } catch (e: any) {
+    
+    return NextResponse.json({ error: e.message}, { status: 500 });
+
+  }
+
+}
