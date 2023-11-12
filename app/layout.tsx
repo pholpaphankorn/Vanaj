@@ -2,10 +2,9 @@ import "./globals.css";
 import { Public_Sans } from "next/font/google";
 
 
-
 const publicSans = Public_Sans({ subsets: ["latin"] });
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;
@@ -35,7 +34,6 @@ export default function RootLayout({
       </head>
       <body className={publicSans.className}>
         <div className="overflow-auto">
-
           {children}
         </div>
       </body>
