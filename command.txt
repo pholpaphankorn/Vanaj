@@ -1,6 +1,6 @@
 docker build -t vanaj .
-docker run -d -p 3000:3000 -v ./app:/app/app -v ./components:/app/components -v ./.env.local:/app/.env.local -v ./tailwind.config.js:/app/tailwind.config.js -v ./public:/app/public -v ./middleware.ts:/app/middleware.ts -v ./auth.ts:/app/auth.ts vanaj
+
 docker run -d -p 3000:3000 -v ./app:/app/app -v ./components:/app/components -v ./.env.local:/app/.env.local -v ./tailwind.config.js:/app/tailwind.config.js -v ./public:/app/public  vanaj
-docker run -d -p 3000:3000 -v ./app:/app/app -v ./components:/app/components -v ./.env.local:/app/.env.local -v ./tailwind.config.js:/app/tailwind.config.js -v ./public:/app/public -v ./middleware.ts:/app/middleware.ts vanaj
+
 
 
