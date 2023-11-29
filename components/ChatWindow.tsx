@@ -1,7 +1,7 @@
 "use client";
 
 
-import 'react-toastify/dist/ReactToastify.css';
+
 
 import { useChat } from "ai/react";
 import { useRef, useState, useEffect } from "react";
@@ -78,6 +78,15 @@ export function ChatWindow(props: {
   async function sendMessage(e: FormEvent<HTMLFormElement>) {
 
     e.preventDefault();
+    const messageInput = e.currentTarget.querySelector('[name="message"]') as HTMLInputElement;
+    const userInput =  messageInput.value;
+    const containsNonWhitespace = /\S/.test(userInput);
+
+    
+    if (!containsNonWhitespace) {
+      setInput("");
+      return;
+    }
 
     if (messageContainerRef.current) {
       messageContainerRef.current.classList.add("grow");
@@ -88,6 +97,7 @@ export function ChatWindow(props: {
     if (chatEndpointIsLoading) {
       return;
     }
+    
     storeQuestions();
     handleSubmit(e);
 
@@ -191,6 +201,7 @@ export function ChatWindow(props: {
                   maxRows={5}
                   placeholder={placeholder}
                   onChange={handleInputChange}
+                  name="message"
 
                 />
                 <button
