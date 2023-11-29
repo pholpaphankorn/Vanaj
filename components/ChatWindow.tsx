@@ -16,6 +16,7 @@ import { AutoResizeTextarea } from "@/components/AutoResizeTextarea";
 import { Navbar } from "@/components/Navbar";
 import LoadingScreen from "@/components/LoadingScreen";
 import ApologyScreen from "@/components/ApologyScreen";
+import { CircularProfile } from "@/components/CircularProfile";
 
 
 
@@ -77,10 +78,10 @@ export function ChatWindow(props: {
 
     e.preventDefault();
     const messageInput = e.currentTarget.querySelector('[name="message"]') as HTMLInputElement;
-    const userInput =  messageInput.value;
+    const userInput = messageInput.value;
     const containsNonWhitespace = /\S/.test(userInput);
 
-    
+
     if (!containsNonWhitespace) {
       setInput("");
       return;
@@ -96,20 +97,20 @@ export function ChatWindow(props: {
       return;
     }
 
-    // storeQuestions();
+    storeQuestions();
     setInput("");
-    const userInputId:string= (messages.length+1).toString()
-    const inputMessage:Message = { id:userInputId,content: userInput, role: 'user',createdAt: new Date() }
+    const userInputId: string = (messages.length + 1).toString()
+    const inputMessage: Message = { id: userInputId, content: userInput, role: 'user', createdAt: new Date() }
     setChatEndpointIsLoading(true);
-    setMessages([...messages,inputMessage] );
+    setMessages([...messages, inputMessage]);
     const responseMessages = await getAIResponse(inputMessage);
     setChatEndpointIsLoading(false);
-    setMessages([...messages,inputMessage,responseMessages] );
-    
+    setMessages([...messages, inputMessage, responseMessages]);
+
 
 
   }
-  async function getAIResponse(inputMessage:Object) {
+  async function getAIResponse(inputMessage: Object) {
 
 
     const response = await fetch(endpoint, {
@@ -117,21 +118,21 @@ export function ChatWindow(props: {
       headers: {
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify({messages:[...messages,inputMessage]}),
-    });    
+      body: JSON.stringify({ messages: [...messages, inputMessage] }),
+    });
     if (!response.ok) {
       setIsWaitingPageVisible(true);
     }
     const responseJSON = await response.json();
-    const responseMessageId:string= (messages.length+2).toString()
-    const responseMessages:Message = { id:responseMessageId,content: responseJSON.message, role: 'assistant' ,createdAt: new Date()}
+    const responseMessageId: string = (messages.length + 2).toString()
+    const responseMessages: Message = { id: responseMessageId, content: responseJSON.message, role: 'assistant', createdAt: new Date() }
 
     return responseMessages
 
   }
 
   async function storeQuestions() {
-    
+
     const message = { question: input, created_at: new Date() }
     try {
       const response = await fetch("/api/retrieval/database", {
@@ -203,6 +204,15 @@ export function ChatWindow(props: {
             <div
               className="flex flex-col-reverse w-full mt-[6vh] mb-[6vh] md:mt-[8vh] md:mb-[8vh] transition-[flex-grow] ease-in-out"
             >
+              {chatEndpointIsLoading ?
+                <div className="flex items-start items-center ">
+                  <CircularProfile active={true} type="chat" />
+                  <div className="typing">
+                    <div className="typing__dot"></div>
+                    <div className="typing__dot"></div>
+                    <div className="typing__dot"></div>
+                  </div>
+                </div> : ""}
               {messages.length > 0 ? (
                 [...messages]
                   .reverse()
@@ -213,6 +223,7 @@ export function ChatWindow(props: {
               ) : (
                 ""
               )}
+
             </div>
           </div>
 
