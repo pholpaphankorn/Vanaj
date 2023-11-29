@@ -10,7 +10,7 @@ import type { FormEvent } from "react";
 
 
 import { ChatMessageBubble } from "@/components/ChatMessageBubble";
-
+import type { Message } from "ai/react";
 
 import { AutoResizeTextarea } from "@/components/AutoResizeTextarea";
 import { Navbar } from "@/components/Navbar";
@@ -35,21 +35,19 @@ export function ChatWindow(props: {
 
   const imgRef = useRef<HTMLImageElement>(null);
 
-  const waitDuration = 30000;
+  const waitDuration = 40000;
   const imageTimeOutIdRef = useRef<NodeJS.Timeout | null>(null);
   const replyTimeOutIdRef = useRef<NodeJS.Timeout | null>(null);
 
-  const { messages, input, setInput, handleInputChange, handleSubmit, isLoading: chatEndpointIsLoading, setMessages } =
+  const { messages, input, setInput, handleInputChange, setMessages } =
     useChat({
       api: endpoint,
-      onResponse: async (response) => {
-
-
+      onResponse: async () => {
       },
-      onError: (e) => {
-        setIsWaitingPageVisible(true);
+      onError: () => {
       }
     });
+  const [chatEndpointIsLoading, setChatEndpointIsLoading] = useState(false);
   async function handleLoadProfileImage() {
 
     setImageProfileIsLoaded(true);
@@ -97,9 +95,38 @@ export function ChatWindow(props: {
     if (chatEndpointIsLoading) {
       return;
     }
+
+    // storeQuestions();
+    setInput("");
+    const userInputId:string= (messages.length+1).toString()
+    const inputMessage:Message = { id:userInputId,content: userInput, role: 'user',createdAt: new Date() }
+    setChatEndpointIsLoading(true);
+    setMessages([...messages,inputMessage] );
+    const responseMessages = await getAIResponse(inputMessage);
+    setChatEndpointIsLoading(false);
+    setMessages([...messages,inputMessage,responseMessages] );
     
-    storeQuestions();
-    handleSubmit(e);
+
+
+  }
+  async function getAIResponse(inputMessage:Object) {
+
+
+    const response = await fetch(endpoint, {
+      method: "POST",
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({messages:[...messages,inputMessage]}),
+    });    
+    if (!response.ok) {
+      setIsWaitingPageVisible(true);
+    }
+    const responseJSON = await response.json();
+    const responseMessageId:string= (messages.length+2).toString()
+    const responseMessages:Message = { id:responseMessageId,content: responseJSON.message, role: 'assistant' ,createdAt: new Date()}
+
+    return responseMessages
 
   }
 
@@ -180,7 +207,6 @@ export function ChatWindow(props: {
                 [...messages]
                   .reverse()
                   .map((m, i) => {
-                    const sourceKey = (messages.length - 1 - i).toString();
                     return (
                       <ChatMessageBubble key={m.id} message={m}></ChatMessageBubble>)
                   })
