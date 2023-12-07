@@ -1,6 +1,8 @@
-docker build -t vanaj .
+docker build -t vanaj-frontend .
 
 docker run -d -p 3000:3000 -v ./app:/app/app -v ./components:/app/components -v ./.env.local:/app/.env.local -v ./tailwind.config.js:/app/tailwind.config.js -v ./public:/app/public  vanaj
 
+docker build -t vanaj-backend -f Dev.Dockerfile .
 
+docker run -d -p 8080:8080 -v ./src:/app/src -v ./.env:/app/.env vanaj-backend ./local-run.sh
 

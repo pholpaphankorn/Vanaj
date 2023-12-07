@@ -7,7 +7,7 @@ export default function ChatPage() {
 
       
       <ChatWindow
-        endpoint="api/chat/retrieval"
+        endpoint={process.env.VANAJ_BACKEND_URL+"/api/chat"}
         placeholder="Ask me some questions!"
       ></ChatWindow>
       
