@@ -1,0 +1,1 @@
+[Vanaj is my Indian friend.](https://vanaj.vercel.app)
