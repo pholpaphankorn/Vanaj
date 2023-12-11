@@ -14,7 +14,8 @@ export function ChatMessageBubble(props: { message: Message}) {
 
   const options = {
     defaultProtocol: 'https',
-    className: linkClassName
+    className: linkClassName,
+    target: '_blank',
   };
 
 
