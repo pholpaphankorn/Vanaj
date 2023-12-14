@@ -129,7 +129,7 @@ nav{
     }
     .hero-container{
 
-      height: calc(100vh - 3rem);
+      height: calc(100svh - 3rem);
 
     }
 
@@ -219,8 +219,7 @@ nav{
     }
     .hero-container{
 
-      height: calc(100vh - 3.5rem);
-
+      height: calc(100svh - 3.5rem);
     }
 
     .vanaj-name-txt{
@@ -301,7 +300,8 @@ nav{
     }
     .hero-container{
 
-      height: calc(100vh - 4rem);
+      height: calc(100svh - 4rem);
+
     }
     .vanaj-name-txt{
       @apply text-lg;
